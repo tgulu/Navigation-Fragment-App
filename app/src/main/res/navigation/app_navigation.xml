@@ -15,24 +15,27 @@
             android:id="@+id/action_mainFragment_to_entryFragment"
             app:destination="@+id/EntryFragment"/>
 
-        <action
-            android:id="@+id/action_mainFragment_to_detailsFragment"
-            app:destination="@+id/DetailsFragment"/>
+        <!-- moves from home frag to details frag -->
+       <action
+           android:id="@+id/action_mainFragment_to_detailsFragment"
+           app:destination="@+id/DetailsFragment"/>
+   </fragment>
 
-    </fragment>
+   <fragment
+       android:id="@+id/EntryFragment"
+       android:name="com.example.navigationfragapp.ui.AddFragment"
+       android:label="Entry Fragment"
+       tools:layout="@layout/fragment_entry">
+       <action
+           android:id="@+id/action_EntryFragment_to_MainFragment"
+           app:destination="@id/MainFragment" />
+   </fragment>
 
-    <fragment
-        android:id="@+id/EntryFragment"
-        android:name="com.example.navigationfragapp.ui.EntryFragment"
-        android:label="Entry Fragment"
-        tools:layout="@layout/fragment_entry"
-        />
-
-    <fragment
-        android:id="@+id/DetailsFragment"
-        android:name="com.example.navigationfragapp.ui.DetailsFragment"
-        android:label="Details Fragment"
-        tools:layout="@layout/fragment_entry"
-        />
+   <fragment
+       android:id="@+id/DetailsFragment"
+       android:name="com.example.navigationfragapp.ui.DetailsFragment"
+       android:label="Details Fragment"
+       tools:layout="@layout/fragment_details"
+       />
 
 </navigation>

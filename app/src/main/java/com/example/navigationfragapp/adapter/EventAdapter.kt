@@ -7,15 +7,19 @@ import com.example.navigationfragapp.databinding.TodoItemBinding
 import com.example.navigationfragapp.model.Event
 
 class EventAdapter(
-    private val eventsList: MutableList<Event> = mutableListOf()
-)
-    : RecyclerView.Adapter<EventViewHolder>() {
-    fun updateEventList(event: Event){
-        eventsList.add(event)
-        notifyDataSetChanged()
-        //notifyItemInserted(eventsList.indexOf(event))
+    // clock handling with interface
+    private val onEventClickHandler: ClickHandler,
+    private val eventsList: MutableList<Event> = mutableListOf(),
 
+    // click handling with high order function
+    private val onClickEventHighOrderFunction: (Event) -> Unit
+) : RecyclerView.Adapter<EventViewHolder>() {
+
+    fun updateEventsList(event: Event) {
+        eventsList.add(event)
+        notifyItemInserted(eventsList.indexOf(event))
     }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventViewHolder =
         EventViewHolder(
             TodoItemBinding.inflate(
@@ -25,25 +29,26 @@ class EventAdapter(
             )
         )
 
-
-    override fun onBindViewHolder(holder: EventViewHolder, position: Int) {
-        holder.bind(eventsList[position])
-    }
+    override fun onBindViewHolder(holder: EventViewHolder, position: Int) =
+        holder.bind(eventsList[position], onEventClickHandler, onClickEventHighOrderFunction)
 
     override fun getItemCount(): Int = eventsList.size
+}
+
+class EventViewHolder(
+    private val binding: TodoItemBinding
+) : RecyclerView.ViewHolder(binding.root) {
+
+    fun bind(event: Event, onEventClickHandler: ClickHandler, onClickEventHighOrderFunction: (Event) -> Unit) {
+        binding.eventName.text = event.name
+        binding.eventCategory.text = event.category
+        binding.eventDate.text = event.date
+
+
+        /*
+        itemView.setOnClickListener {
+
+            onClickEventHighOrderFunction(event)
+        } */
     }
-
-
-    class EventViewHolder(
-        private val binding: TodoItemBinding
-    ) : RecyclerView.ViewHolder(binding.root) {
-
-        fun bind(event: Event) {
-            binding.eventName.text = event.name
-            binding.eventCategory.text = event.category
-            binding.eventDate.text = event.data
-
-        }
-    }
-
-
+}
