@@ -36,6 +36,10 @@
        android:name="com.example.navigationfragapp.ui.DetailsFragment"
        android:label="Details Fragment"
        tools:layout="@layout/fragment_details"
-       />
+       >
+       <action
+           android:id="@+id/action_DetailsFragment_to_MainFragment"
+           app:destination="@id/MainFragment" />
+   </fragment>
 
 </navigation>

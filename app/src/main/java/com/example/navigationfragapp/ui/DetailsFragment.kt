@@ -1,13 +1,10 @@
 package com.example.navigationfragapp.ui
 
-//mport android.app.Fragment
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
-import androidx.navigation.fragment.findNavController
 import com.example.navigationfragapp.R
 import com.example.navigationfragapp.databinding.FragmentDetailsBinding
 import com.example.navigationfragapp.model.Event

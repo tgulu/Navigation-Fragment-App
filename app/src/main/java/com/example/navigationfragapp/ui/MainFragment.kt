@@ -79,6 +79,7 @@ class MainFragment : Fragment(), ClickHandler {
         }
     }
 
+
     override fun onEventItemClick(event: Event) {
         findNavController().navigate(
             R.id.action_mainFragment_to_addFragment,

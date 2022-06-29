@@ -12,8 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.navigationfragapp.R
 import com.example.navigationfragapp.databinding.FragmentEntryBinding
 import com.example.navigationfragapp.model.Event
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
+import java.text.SimpleDateFormat
 
 class AddFragment : Fragment() {
 
@@ -26,7 +25,7 @@ class AddFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
 
         binding.eventNameEntry.addTextChangedListener(object: TextWatcher {
@@ -47,15 +46,17 @@ class AddFragment : Fragment() {
         binding.saveEventBtn.setOnClickListener {
             val name = binding.eventNameEntry.text.toString()
             val category = binding.eventCategoryEntry.text.toString()
-            val dt = binding.calendarEvent.date.toString()
+            //val dt = binding.calendarEvent.date.toString()
+            //val date = dateToString(longToDate(currentItem.dt))
 
-//            val sdf = SimpleDateFormat("dd/MM/yy hh:mm a")
-//            val netDate = Date(date.timestamp)
-//            val dt =sdf.format(netDate)
+            val SimpleF = SimpleDateFormat("MM/dd/yyyy")
+            var date: String
+            binding.calendarEvent.setOnDateChangeListener{view,year,month,dayOfMonth ->
+                date = "${month+1}/$dayOfMonth/$year"
+            }.let {
+                date = SimpleF.format(binding.calendarEvent.date)
+            }
 
-            val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm");
-            val booking = LocalDate.parse(dt, formatter)
-            val date = booking.toString()
             Event(name, category, date).also {
                 findNavController().navigate(R.id.action_EntryFragment_to_MainFragment, bundleOf(
                     Pair(EVENT_DATA, it)

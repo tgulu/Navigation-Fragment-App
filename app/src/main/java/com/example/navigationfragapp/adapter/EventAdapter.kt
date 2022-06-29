@@ -44,11 +44,5 @@ class EventViewHolder(
         binding.eventCategory.text = event.category
         binding.eventDate.text = event.date
 
-
-        /*
-        itemView.setOnClickListener {
-
-            onClickEventHighOrderFunction(event)
-        } */
     }
 }
